@@ -1,0 +1,49 @@
+##task 1: choose or download data
+data("mtcars")
+head(mtcars)
+str(mtcars)
+
+##task 2: test generic functions
+summary(mtcars)
+plot(mtcars$gear)
+plot(mtcars$mpg)
+
+##task 3: Explore S3 vs S4
+##S3
+add_car <- function(year, make, model){
+  car <- list(
+    year = year,
+    make = make,
+    model = model
+  )
+  class(car) <- "Car"
+  return(car)
+}
+
+mycar <- add_car(2020, "Honda", "Civic")
+print(mycar)
+
+##S4
+setClass("athlete",
+         slots = c(
+           name = "character",
+           age = "numeric",
+           sport = "character",
+           team = "character"
+         ),
+         prototype = list(
+           name = NA_character_,
+           age = NA_real_,
+           sport = NA_character_,
+           team = NA_character_
+         )
+)
+
+athlete3 <- new("athlete",
+                name = "Simone Biles",
+                age = 28,
+                sport = "Gymnastics",
+                team = "USA"
+)
+
+print(athlete3)
